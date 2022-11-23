@@ -28,10 +28,9 @@ class MagicConnect extends Component {
     render() {
         web3.eth.getAccounts().then(accounts => console.log(accounts[0]));
         magic.connect.getWalletInfo().then(({ walletType }) => this.setState({ walletType }));
-        console.log("walletType", this.state.walletType);
         magic.connect.showWallet();
         return (
-            <h1>Hello World</h1>
+            <></>
         )
     }
 }
