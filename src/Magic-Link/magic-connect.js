@@ -23,12 +23,18 @@ class MagicConnect extends Component {
         super(props);
         this.state = { walletType: '' };
     }
-
-
     render() {
-        web3.eth.getAccounts().then(accounts => console.log(accounts[0]));
-        magic.connect.getWalletInfo().then(({ walletType }) => this.setState({ walletType }));
-        magic.connect.showWallet();
+        if (this.state.walletType === '') {
+            web3.eth.getAccounts().then(accounts => console.log(accounts[0]));
+            magic.connect.getWalletInfo().then(({ walletType }) => this.setState({ walletType }));
+            console.log("walletType", this.state.walletType);
+        } else if (this.state.walletType === 'magic') {
+            magic.connect.showWallet().then(() => this.setState({ walletType: '' }));
+        } else {
+            magic.connect.disconnect().then(() => this.setState({ walletType: '' }));
+        }
+
+
         return (
             <></>
         )
